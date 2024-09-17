@@ -30,6 +30,8 @@ def process_grades(file_path):
             print(f"{name} , GPA: {gpa} , Study Hours: {hours}" )
             if hours == 8:
                 probation_list.append(name)
-        print(f"Probation List: {probation_list}")
+        print("\n\nMembers on Probation:")
+        for item in probation_list:
+            print(item)
 file_path = 'grades.csv'
 process_grades(file_path)
