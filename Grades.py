@@ -14,7 +14,7 @@ def process_grades(file_path):
     with open(file_path, mode='r') as file:
         csv_reader = csv.reader(file)
         next(csv_reader)
-        
+        probation_list = []
         for row in csv_reader:
             #Only 1 comma/line in .csv so we format it ourselves 
             SID = row[0].split(' ')
@@ -28,6 +28,8 @@ def process_grades(file_path):
             #Pass GPA to Study Hours Calculator
             hours = calculate_required_hours(float(gpa))
             print(f"{name} , GPA: {gpa} , Study Hours: {hours}" )
-            
+            if hours == 8:
+                probation_list.append(name)
+        print(f"Probation List: {probation_list}")
 file_path = 'grades.csv'
 process_grades(file_path)
