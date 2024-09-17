@@ -13,17 +13,21 @@ def calculate_required_hours(gpa):
 def process_grades(file_path):
     with open(file_path, mode='r') as file:
         csv_reader = csv.reader(file)
-        
-        # Skipping the header row if it exists
         next(csv_reader)
         
         for row in csv_reader:
-            name = row[1]
-            gpa = float(row[6])  
+            #Only 1 comma/line in .csv so we format it ourselves 
+            SID = row[0].split(' ')
+            firstN = SID[1]
+            contents = (row[1])  
+            member_info = contents.split(' ')
+            #Format Name
+            name = member_info[1] + " " + firstN
+            #Grab GPA
+            gpa = member_info[6]
+            #Pass GPA to Study Hours Calculator
+            hours = calculate_required_hours(float(gpa))
+            print(f"{name} , GPA: {gpa} , Study Hours: {hours}" )
             
-            required_hours = calculate_required_hours(gpa)
-            
-            print(f"Name: {name}, Required Study Hours: {required_hours}")
-
 file_path = 'grades.csv'
 process_grades(file_path)
